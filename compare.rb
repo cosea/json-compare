@@ -3,7 +3,6 @@ require 'open-uri'
 require 'json'
 require 'trollop'
 
-
 opts = Trollop::options do
 	version "0.0.1 (c) by COSEA. Released under modified BSD. See LICENSE.txt for details."
 
@@ -24,24 +23,12 @@ end
 Trollop::die :original, "must be given" unless opts[:original]
 Trollop::die :check, "must be given" unless opts[:check]
 
-original_file = 'original.json'
-check_file = 'check.json'
 
-# download both files
-#File.open(original_file,'wb') do |f|
-#	f.write open(opts[:original],http_basic_authentication: opts['auth-original'].split(':')).read
-#end
 
-#File.open(check_file,'wb') do |f|
-#	f.write open(opts[:check],http_basic_authentication: opts['auth-check'].split(':') ).read
-#end
-
+# parse the data into hashes
 original_data = JSON.parse open(opts[:original],http_basic_authentication: opts['auth-original'].split(':')).read
 check_data = JSON.parse open(opts[:check],http_basic_authentication: opts['auth-check'].split(':')).read
 
-# parse them into hashes
-#original_data = JSON.parse IO.read(original_file)
-#check_data = JSON.parse IO.read(check_file)
 
 diff = HashDiff.diff(original_data,check_data)
 

@@ -10,7 +10,7 @@ module HashDiff
 	# an array of keys that can be ignored
 	# 
 	def self.same?(left, right, options={})
-		puts "same?:#{left}, #{right}, #{options}"
+#		puts "same?:#{left}, #{right}, #{options}"
 		return true if left == right # cheap early exit
 		return false unless left.class == right.class
 		case left
